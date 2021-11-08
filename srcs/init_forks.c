@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_forks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 20:15:14 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/08 17:08:04 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/08 16:48:36 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/08 17:08:45 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char *argv[])
+int init_forks(t_table *table)
 {
-	t_table table;
-	t_table *pointer = &table;
+	int i;
 
-	if (argc < 5 || argc > 6)
+	i = 0;
+	table->forks = malloc(sizeof(t_fork *) * table->ammount);
+	if (!table->forks)
 		return (0);
-	table.ammount = ft_atoi(argv[1]);
-	if (init_forks(&table) == 0)
-		return (0);
-	
-	if (init_philos(&table) == 0)
-		return (0);
-
-	start_threads(pointer);
-
-	return (1);
+	while (i <= table->ammount)
+	{
+		pthread_mutex_init(&table->forks[i].forkMutex, NULL);
+		table->forks[i].id = i;
+		i++;
+	}
+	return (i);
 }
