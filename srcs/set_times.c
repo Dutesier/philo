@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_threads.c                                    :+:      :+:    :+:   */
+/*   set_times.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/29 16:43:35 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/08 19:04:20 by dareias-         ###   ########.fr       */
+/*   Created: 2021/11/08 17:48:35 by dareias-          #+#    #+#             */
+/*   Updated: 2021/11/08 18:15:53 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int start_threads(t_table *table)
+void set_times(char *argv[], t_times *time)
 {
-	//printf("Entered s_threads\n");
-	int i;
-
-	i = table->ammount;
-	//printf("table->ammount:  %i\n", i);
-	
-	i = 0;
-	while (i < table->ammount)
-	{
-		//printf("Trying to create thread for philo %i, with id %i\n", i, table->philos[i].id);
-		if (pthread_create(&table->philos[i].th, NULL, &routine, (void *)(&table->philos[i])))
-			return (i);
-		i++;
-	}
-	//printf("Left s_threads\n");
-	return (i);
+	gettimeofday(&time->t_start, NULL);
+	time->t_to_d = ft_atoi(argv[2]);
+	time->t_to_e = ft_atoi(argv[3]);
+	time->t_to_s = ft_atoi(argv[4]);
 }

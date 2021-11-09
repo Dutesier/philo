@@ -18,10 +18,14 @@ DIR_O	=	obj
 # Using wildcards: $(shell find $(DIR_S) -name *.c)
 SRCS 		:=	srcs/main.c \
 			   	srcs/start_threads.c \
+			   	srcs/set_times.c \
 				srcs/init_philos.c \
 				srcs/init_forks.c \
 		   		srcs/routine.c \
+		   		srcs/lock_forks.c \
+		   		srcs/starvation.c \
 		   		srcs/utils/ft_atoi.c \
+		   		srcs/utils/printing.c \
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)
 
