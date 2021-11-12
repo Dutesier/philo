@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:30:33 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/09 17:52:07 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:39:32 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,18 @@ void print_state(t_philo *philo)
 	state[1] = "is eating";
 	state[2] = "is sleeping";
 	state[3] = "is thinking";
-	state[4] = "has died";
+	state[4] = "died";
 	t = get_timeval(philo->time.t_start);
-	printf("%lld %i %s\n", t / 1000, philo->id, state[philo->state]);
+	if (philo->state == dead && *philo->killer == 0)
+		*philo->killer = 1;
+	if (*philo->killer != 2)
+	{
+		if (*philo->killer == 1)
+			*philo->killer = 2;
+		printf("%lld %i %s\n", t / 1000, philo->id, state[philo->state]);
+	}
+	else
+		philo->state = dead;
 	pthread_mutex_unlock(philo->print_mutex);
 }
 

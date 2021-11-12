@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 16:48:36 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/09 19:15:10 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:46:34 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static int init_locked(t_table *table)
 	return (i);
 }
 
-
-
 int init_forks(t_table *table)
 {
 	int i;
@@ -42,14 +40,14 @@ int init_forks(t_table *table)
 	i = 0;
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->ammount);
 	if (!table->forks)
-		return (0);
+		return (1);
 	while (i < table->ammount)
 	{
-		pthread_mutex_init(&table->forks[i], NULL);
-		//printf("Forks[%i]: %p\n", i, (void *)(&table->forks[i]));
+		if (pthread_mutex_init(&table->forks[i], NULL) != 0)
+			return (1 + forks_free(table, 1, i - 1));
 		i++;
 	}
 	if (init_locked(table) == 0)
-		return (0); // We actually need to free table->forks and destroy the mutexes
-	return (-42);
+		return (1 + forks_free(table, 1, i - 1)); // We actually need to free table->forks and destroy the mutexes
+	return(0);
 }

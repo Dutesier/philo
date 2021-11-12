@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 16:01:42 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/09 18:02:31 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:34:15 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int init_philos(t_table *table)
 		table->philos[i].id = i + 1;
 		table->philos[i].print_mutex = table->print_mutex;
 		gettimeofday(&table->philos[i].last_meal, NULL);
+		table->philos[i].killer = table->killer;
 		//printf("Setting id at %i\n", i + 1);
 		i++;
 	}

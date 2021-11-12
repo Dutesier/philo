@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:12:06 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/09 19:08:12 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:52:42 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_times
 	int			t_to_d;
 	int			t_to_e;
 	int			t_to_s;
+	int			full;
 }				t_times;
 
 typedef struct	s_philo
@@ -56,6 +57,8 @@ typedef struct	s_philo
 	int				times_eaten;
 	t_timeval		last_meal;
 
+	int				*killer;
+
 	t_times			time;
 
 }				t_philo;
@@ -63,6 +66,7 @@ typedef struct	s_philo
 typedef struct	s_table
 {
 	int					ammount;
+	int					*killer;
 
 	t_philo				*philos;
 	
@@ -78,6 +82,7 @@ typedef struct	s_table
 
 
 int start_threads(t_table *table);
+int join_threads(t_table *table);
 int init_philos(t_table *table);
 int init_forks(t_table *table);
 
@@ -90,4 +95,8 @@ long long int get_timeval(t_timeval t_start);
 long long int starvation(t_philo *philo);
 int lock_forks(t_philo *philo);
 void set_unlocked(pthread_mutex_t *f, int *locked);
+
+int table_free(t_table *table, int layer);
+int forks_free(t_table *table, int layer, int sublayer);
+
 #endif

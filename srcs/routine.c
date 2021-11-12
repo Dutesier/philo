@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 18:20:24 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/09 19:16:40 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:39:58 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void *routine(void *void_philo)
 	
 	//printf("My id: %i\nMy t_start: %ld\n", philo->id, philo->time.t_start.tv_sec * 1000 + philo->time.t_start.tv_usec);
 	philo->state = thinking;
-	while (philo->state != dead)
+	while (philo->state != dead && philo->time.full != philo->times_eaten)
 	{
 		if (philo->state == thinking && lock_forks(philo))
 			eat(philo);
@@ -61,13 +61,13 @@ static int eat(t_philo *philo)
 
 static int go_sleep(t_philo *philo)
 {
-	set_unlocked(philo->left_f, philo->left_locked);
-	set_unlocked(philo->right_f, philo->right_locked);
 	long long int s;
 
 	s = starvation(philo);
 	philo->state = sleeping;
 	print_state(philo);
+	set_unlocked(philo->left_f, philo->left_locked);
+	set_unlocked(philo->right_f, philo->right_locked);
 	if (s / 1000 <= philo->time.t_to_s)
 	{
 		if (s < 0)
