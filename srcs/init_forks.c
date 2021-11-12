@@ -6,15 +6,15 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 16:48:36 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/12 16:46:34 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/12 17:38:57 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int init_locked(t_table *table)
+static int	init_locked(t_table *table)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	table->locked = malloc(sizeof(int) * table->ammount);
@@ -33,9 +33,9 @@ static int init_locked(t_table *table)
 	return (i);
 }
 
-int init_forks(t_table *table)
+int	init_forks(t_table *table)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->ammount);
@@ -48,6 +48,6 @@ int init_forks(t_table *table)
 		i++;
 	}
 	if (init_locked(table) == 0)
-		return (1 + forks_free(table, 1, i - 1)); // We actually need to free table->forks and destroy the mutexes
-	return(0);
+		return (1 + forks_free(table, 1, i - 1));
+	return (0);
 }

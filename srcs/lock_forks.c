@@ -6,15 +6,15 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 17:07:13 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/09 19:10:42 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/12 17:35:43 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int try_lock_fork(pthread_mutex_t *f, int *locked);
+static int	try_lock_fork(pthread_mutex_t *f, int *locked);
 
-int lock_forks(t_philo *philo)
+int	lock_forks(t_philo *philo)
 {
 	if (try_lock_fork(philo->left_f, philo->left_locked))
 	{
@@ -26,13 +26,13 @@ int lock_forks(t_philo *philo)
 			return (1);
 		}
 		set_unlocked(philo->left_f, philo->left_locked);
-	};
+	}
 	return (0);
 }
 
-static int try_lock_fork(pthread_mutex_t *f, int *locked)
+static int	try_lock_fork(pthread_mutex_t *f, int *locked)
 {
-	int status;
+	int	status;
 
 	status = 0;
 	pthread_mutex_lock(f);
@@ -45,7 +45,7 @@ static int try_lock_fork(pthread_mutex_t *f, int *locked)
 	return (status);
 }
 
-void set_unlocked(pthread_mutex_t *f, int *locked)
+void	set_unlocked(pthread_mutex_t *f, int *locked)
 {
 	pthread_mutex_lock(f);
 	*locked = 0;

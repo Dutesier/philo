@@ -6,16 +6,16 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:15:14 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/12 16:57:12 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/12 17:34:21 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_table table;
-	int	stat;
+	t_table	table;
+	int		stat;
 
 	stat = 0;
 	table.killer = &stat;
@@ -35,4 +35,4 @@ int main(int argc, char *argv[])
 	start_threads(&table);
 	join_threads(&table);
 	return (table_free(&table, 2));
-} 
+}
