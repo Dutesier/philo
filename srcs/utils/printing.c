@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:30:33 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/15 10:26:59 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/15 10:33:20 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ long long int	get_timeval(t_timeval t_start);
 
 static void	update_killers(t_philo *philo)
 {
-	if (philo->times_eaten == philo->time.full && philo->state == eating)
-		if (*philo->all_full > 0)
-			*philo->all_full = *philo->all_full - 1;
+	if (philo->times_eaten == philo->time.full && philo->state == eating
+		&& *philo->all_full > 0)
+		*philo->all_full = *philo->all_full - 1;
 	if (philo->state == dead && *philo->killer == 0)
 		*philo->killer = 1;
 }
