@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:46:46 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/12 17:32:27 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/13 13:31:24 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,14 @@ int	join_threads(t_table *table)
 			return (1);
 		i++;
 	}
+	i = 0;
+	while (i < table->ammount)
+	{
+		if (pthread_mutex_destroy(&table->forks[i]) != 0)
+			return (1);
+		i++;
+	}
+	if (pthread_mutex_destroy(table->print_mutex) != 0)
+		return (1);
 	return (0);
 }

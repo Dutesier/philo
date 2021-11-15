@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 16:01:42 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/12 17:40:23 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/15 10:20:56 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ int	init_philos(t_table *table)
 	while (i < table->ammount)
 	{
 		table->philos[i].id = i + 1;
+		table->philos[i].times_eaten = 0;
 		table->philos[i].print_mutex = table->print_mutex;
 		gettimeofday(&table->philos[i].last_meal, NULL);
 		table->philos[i].killer = table->killer;
+		table->philos[i].all_full = table->all_full;
 		i++;
 	}
 	index_forks(table);

@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 18:20:24 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/12 17:38:20 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/15 10:21:10 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ void	*routine(void *void_philo)
 
 	philo = (t_philo *)void_philo;
 	philo->state = thinking;
-	while (philo->state != dead && philo->time.full != philo->times_eaten)
+	while (philo->state != dead)
 	{
 		if (philo->state == thinking && lock_forks(philo))
 			eat(philo);
+		if (*philo->all_full == 0 || *philo->all_full == -2)
+			return (NULL);
 		if (philo->state == eating)
 			go_sleep(philo);
 		if (starvation(philo) < 0)
@@ -42,10 +44,10 @@ void	*routine(void *void_philo)
 static int	eat(t_philo *philo)
 {	
 	philo->state = eating;
+	philo->times_eaten++;
 	print_state(philo);
 	gettimeofday(&philo->last_meal, NULL);
 	usleep(philo->time.t_to_e * 1000);
-	philo->times_eaten++;
 	return (1);
 }
 
@@ -53,11 +55,11 @@ static int	go_sleep(t_philo *philo)
 {
 	long long int	s;
 
-	s = starvation(philo);
 	philo->state = sleeping;
 	print_state(philo);
 	set_unlocked(philo->left_f, philo->left_locked);
 	set_unlocked(philo->right_f, philo->right_locked);
+	s = starvation(philo);
 	if (s / 1000 <= philo->time.t_to_s)
 	{
 		if (s < 0)

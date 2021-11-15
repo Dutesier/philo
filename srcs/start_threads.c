@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 16:43:35 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/12 17:29:24 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/15 09:33:30 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	start_threads(t_table *table)
 	i = 0;
 	while (i < table->ammount)
 	{
+		
 		if (pthread_create(&table->philos[i].th,
 				NULL, &routine, (void *)(&table->philos[i])))
 			return (i);
