@@ -28,6 +28,7 @@ SRCS 		:=	srcs/main.c \
 		   		srcs/utils/ft_atoi.c \
 		   		srcs/utils/printing.c \
 		   		srcs/utils/freedom.c \
+		   		srcs/utils/ft_sleep.c \
 
 OBJS		:= $(SRCS:%.c=$(DIR_O)/%.o)
 

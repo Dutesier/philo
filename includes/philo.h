@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:12:06 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/12 19:13:02 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/15 13:03:54 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,7 @@ void			set_unlocked(pthread_mutex_t *f, int *locked);
 
 int				table_free(t_table *table, int layer);
 int				forks_free(t_table *table, int layer, int sublayer);
+
+void			ft_sleep(t_timeval t, long long s);
 
 #endif
