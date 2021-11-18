@@ -6,13 +6,13 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:30:33 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/15 10:33:20 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/18 10:29:08 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long long int	get_timeval(t_timeval t_start);
+long long int	get_timeval(struct timeval t_start);
 
 static void	update_killers(t_philo *philo)
 {
@@ -49,10 +49,10 @@ void	print_state(t_philo *philo)
 	pthread_mutex_unlock(philo->print_mutex);
 }
 
-long long int	get_timeval(t_timeval t_start)
+long long int	get_timeval(struct timeval t_start)
 {
 	long long int	t;
-	t_timeval		curr;
+	struct timeval	curr;
 
 	gettimeofday(&curr, NULL);
 	t = (curr.tv_sec - t_start.tv_sec) * 1000000

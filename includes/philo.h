@@ -6,7 +6,7 @@
 /*   By: dareias- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 20:12:06 by dareias-          #+#    #+#             */
-/*   Updated: 2021/11/15 13:03:54 by dareias-         ###   ########.fr       */
+/*   Updated: 2021/11/18 10:30:37 by dareias-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,13 @@ typedef enum e_state
 	dead
 }			t_state;
 
-typedef struct timeval	t_timeval;
-
 typedef struct s_times
 {
-	t_timeval	t_start;
-	int			t_to_d;
-	int			t_to_e;
-	int			t_to_s;
-	int			full;
+	struct timeval	t_start;
+	int				t_to_d;
+	int				t_to_e;
+	int				t_to_s;
+	int				full;
 }				t_times;
 
 typedef struct s_philo
@@ -54,7 +52,7 @@ typedef struct s_philo
 	int				*right_locked;
 
 	int				times_eaten;
-	t_timeval		last_meal;
+	struct timeval	last_meal;
 
 	int				*killer;
 	int				*all_full;
@@ -90,7 +88,7 @@ int				ft_atoi(char *str);
 void			set_times(char *argv[], t_times *time, int ac);
 
 void			print_state(t_philo *philo);
-long long int	get_timeval(t_timeval t_start);
+long long int	get_timeval(struct timeval t_start);
 long long int	starvation(t_philo *philo);
 int				lock_forks(t_philo *philo);
 void			set_unlocked(pthread_mutex_t *f, int *locked);
@@ -98,6 +96,6 @@ void			set_unlocked(pthread_mutex_t *f, int *locked);
 int				table_free(t_table *table, int layer);
 int				forks_free(t_table *table, int layer, int sublayer);
 
-void			ft_sleep(t_timeval t, long long s);
+void			ft_sleep(struct timeval t, long long s);
 
 #endif
